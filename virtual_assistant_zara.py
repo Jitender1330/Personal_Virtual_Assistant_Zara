@@ -612,13 +612,18 @@ def authentiation():
 	results = face_recognition.compare_faces([jitu_face_encoding], unknown_face_encoding)
 
 	if results[0]:
-		speak('you are authorized sir.')
-		speak('welcome how are you?')
-	else:
-		speak('sorry you are not authorized. you are not jitender')
-		speak('please try again later')
-		sys.exit()
+		try:
+			speak('you are authorized sir.')
+			speak('welcome jitender how are you?')
+		
 
+		except Exception as e:
+			speak('sorry you are not authorized. you are not jitender')
+			speak('please try again later')
+			return "None"
+
+	else:
+		sys.exit()
 authentiation()
 	
 if __name__ == "__main__":
@@ -1040,6 +1045,22 @@ if __name__ == "__main__":
 				color_continuous_scale = 'RdYlGn',
 				animation_frame = "Date")
 			figure.show()
+			moveOn()
+			continue
+			
+			elif 'convert' in query.lower():
+			speak('converting the image to text')
+			speak('analyzing it now')
+			import pytesseract as tess
+			tess.pytesseract.tesseract_cmd = r'C:\\Users\\jitender\\AppData\\Local\\Tesseract-OCR\\tesseract.exe'
+			from PIL import Image
+
+			img = Image.open('C:\\Users\\jitender\\Desktop\\assistant\\text1.png')
+			text = tess.image_to_string(img)
+			print(f'here is your text sir')
+			speak(f'here is your text sir')
+			print(text)
+			speak(text)
 			moveOn()
 			continue
 			
